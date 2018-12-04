@@ -1,51 +1,53 @@
-const jwt = require('jsonwebtoken');
 const {SHA256} = require('crypto-js');
-const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs')
 
-var password = 'abc123!'
-var hashValue = '$2a$10$MeyRmRx9Fw9XD4gkd1W0qeBgLSebDHCDx3rqVO37oUqDMOsmuHkhy';
+var password = '123abc!';
 
-bcrypt.genSalt(10, (err, salt) => {
-    bcrypt.hash(password, salt, (err, hash) => {
-        // Store hash in your password DB.
-        console.log(hash);
-    });
-});
+// bcrypt.genSalt(10, (err, salt) => {
+//   bcrypt.hash(password, salt, (err, hash) => {
+//     console.log(hash);
+//   });
+// });
 
-bcrypt.compare(password, hashValue).then((res) => {
-    console.log(res);
+var hashedPassword = '$2a$10$huAU4qTnQuGPifHEXfV9cOmPJ7p61oKaoXrY1WviiDAznE/rW8oLK';
+
+bcrypt.compare('123!', hashedPassword, (err, res) => {
+  console.log(res);
 });
 
 // var data = {
-//     id: 10
-// }
-
+//   id: 10
+// };
+//
 // var token = jwt.sign(data, '123abc');
 // console.log(token);
+//
 // var decoded = jwt.verify(token, '123abc');
-// console.log(decoded);
-// const {SHA256} = require('crypto-js');
+// console.log('decoded', decoded);
 
 // var message = 'I am user number 3';
 // var hash = SHA256(message).toString();
-// console.log(hash);
+//
+// console.log(`Message: ${message}`);
+// console.log(`Hash: ${hash}`);
 
 // var data = {
-//     id: 4
+//   id: 4
 // };
-
 // var token = {
-//     data,
-//     hash: SHA256(JSON.stringify(data) + 'somesecret').toString()
+//   data,
+//   hash: SHA256(JSON.stringify(data) + 'somesecret').toString()
 // }
-
-// token.data.id = 5;
-// token.hash = SHA256(JSON.stringify(token.data)).toString()
-
+//
+//
+// // token.data.id = 5;
+// // token.hash = SHA256(JSON.stringify(token.data)).toString();
+//
+//
 // var resultHash = SHA256(JSON.stringify(token.data) + 'somesecret').toString();
-
 // if (resultHash === token.hash) {
-//     console.log('Data was not changed');
+//   console.log('Data was not changed');
 // } else {
-//     console.log('Data was changed');
+//   console.log('Data was changed. Do not trust!');
 // }
